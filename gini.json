@@ -1,0 +1,15 @@
+{
+    "id": "gapper-auth-harbin",
+    "name": "哈尔滨登录",
+    "description": "Gapper Login UI",
+    "version": "0.1.1-0",
+    "dependencies": {
+        "gini": ">=0.6.0",
+        "auth": "^0.1.2"
+    },
+    "composer": {
+        "require": {
+            "tecnick.com/tcpdf": "dev-master"
+        }
+    }
+}

@@ -1,0 +1,6 @@
+---
+auth:
+    harbin:
+        icon: assets/img/gapper-auth-nankai/logo.png
+        name: 添加新用户
+...
