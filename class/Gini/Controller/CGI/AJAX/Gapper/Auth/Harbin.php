@@ -52,11 +52,21 @@ class Harbin extends \Gini\Controller\CGI
         $form = $this->form('post');
         $secret = \Gini\Config::get('app.harbin_secret');
         // TODO
-        $data = []; // user posted data
+        $data = [
+            'wid'=> $form['wid'],
+            'name'=> $form['name'],
+            'department'=> $form['department'],
+            'group'=> $form['group'],
+            'email'=> $form['email'],
+            'phone'=> $form['phone'],
+            'address'=> $form['address']
+        ]; 
         $code = hash_hmac('sha1', json_encode($data), $secret);
         $qrcode = a('qrcode', ['qrcode'=>$code]);
         if (!$qrcode->id) {
-            $qrcode->info = $data;
+            foreach ($data as $k=>$v) {
+                $qrcode->$k = $v;
+            }
             $qrcode->save();
         }
         $_SESSION[self::$sessionKey] = $code;

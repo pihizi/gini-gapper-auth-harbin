@@ -5,25 +5,39 @@
                 <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span></button>
                 <h4 class="modal-title"><?=H(T('账号开通申请'))?></h4>
             </div>
-            <form class="modal-body form gapper-auth-form" method="POST" action="ajax/gapper/auth/harbin/register"><dl class="dl-horizontal">
-                <dt class="text-center">
-                    <div class="app-icon">
-                        <div class="text-center app-icon-image"><img src="<?=H($icon)?>" /></div>
-                        <div class="text-center app-icon-title"><?=H($type)?></div>
-                    </div>
-                </dt>
-                <dd>
-                    <div class="form-group">
-                        <input class="form-control" type="text" name="username" placeholder="<?=H(T('卡号'))?>" />
-                    </div>
-                    <div class="form-group">
-                        <input class="form-control" type="password" name="password" placeholder="<?=H(T('密码'))?>" />
-                    </div>
-                    <div class="form-group">
-                        <input class="form-control btn btn-primary" type="submit" value="<?=H(T('提交'))?>"/>
-                    </div>
-                </dd>
-            </dl></form>
+            <form class="modal-body form gapper-auth-form" method="POST" action="ajax/gapper/auth/harbin/register">
+                <div class="form-group">
+                    <label><?=H(T('院系名称'))?></label>
+                    <input class="form-control" type="text" name="department" />
+                </div>
+                <div class="form-group">
+                    <label><?=H(T('课题组名称'))?></label>
+                    <input class="form-control" type="text" name="group" />
+                </div>
+                <div class="form-group">
+                    <label><?=H(T('PI 姓名'))?></label>
+                    <input class="form-control" type="text" name="name" />
+                </div>
+                <div class="form-group">
+                    <label><?=H(T('PI 工号'))?></label>
+                    <input class="form-control" type="text" name="wid" />
+                </div>
+                <div class="form-group">
+                    <label><?=H(T('PI 邮箱'))?></label>
+                    <input class="form-control" type="text" name="email" />
+                </div>
+                <div class="form-group">
+                    <label><?=H(T('联系电话'))?></label>
+                    <input class="form-control" type="text" name="phone" />
+                </div>
+                <div class="form-group">
+                    <label><?=H(T('地址'))?></label>
+                    <input class="form-control" type="text" name="address" />
+                </div>
+                <div class="form-group">
+                    <input class="form-control btn btn-primary" type="submit" value="<?=H(T('提交'))?>"/>
+                </div>
+            </form>
         </div>
     </div>
 </div>
