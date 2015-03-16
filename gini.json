@@ -9,6 +9,7 @@
     },
     "composer": {
         "require": {
+            "overtrue/pinyin": "dev-master",
             "tecnick.com/tcpdf": "dev-master"
         }
     }
