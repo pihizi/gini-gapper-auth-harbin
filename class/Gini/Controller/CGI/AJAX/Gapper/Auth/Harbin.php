@@ -34,7 +34,14 @@ class Harbin extends \Gini\Controller\CGI
     {
         $data = $_SESSION[self::$sessionKey];
         $code = self::_getCode();
-        $ret = "唯一标识: {$code}";
+        $ret = H(T('唯一标识: ')) . $code;
+        $ret .= "\n" . H(T('院系名称: ')) . $data['department'];
+        $ret .= "\n" . H(T('课题组名称: ')) . $data['group'];
+        $ret .= "\n" . H(T('PI 姓名: ')) . $data['name'];
+        $ret .= "\n" . H(T('PI 工号: ')) . $data['wid'];
+        $ret .= "\n" . H(T('PI 邮箱: ')) . $data['email'];
+        $ret .= "\n" . H(T('联系电话: ')) . $data['phone'];
+        $ret .= "\n" . H(T('地址: ')) . $data['address'];
         return $ret;
     }
 
