@@ -140,7 +140,7 @@ class Harbin extends \Gini\Controller\CLI
                     'department'=> $department,
                     'group'=> $group,
                     'password'=> $password
-                ])
+                ]))
             ->send();
     }
 }
