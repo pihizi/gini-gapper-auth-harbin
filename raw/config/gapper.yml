@@ -1,6 +1,6 @@
 ---
 auth:
     harbin:
-        icon: assets/img/gapper-auth-nankai/logo.png
-        name: 添加新用户
+        icon: assets/img/gapper-auth-harbin/logo-add.png
+        name: 账号开通申请
 ...
