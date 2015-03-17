@@ -2,6 +2,8 @@
 
 namespace Gini\Controller\CLI\Gapper\Auth;
 
+use \Overtrue\Pinyin\Pinyin;
+
 class Harbin extends \Gini\Controller\CLI
 {
     use \Gini\Module\Gapper\Client\RPCTrait;
