@@ -143,6 +143,7 @@ class Harbin extends \Gini\Controller\CGI
             foreach ($data as $k=>$v) {
                 $qrcode->$k = $v;
             }
+            $qrcode->ctime = date('Y-m-d H:i:s');
             $qrcode->save();
         }
         return $this->showJSON([

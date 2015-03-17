@@ -22,7 +22,7 @@ class Harbin extends \Gini\Controller\CLI
             return;
         }
 
-        if ($record->atime) {
+        if ($record->atime > 0) {
             echo '该用户已经被激活';
             echo "\n";
             return;
