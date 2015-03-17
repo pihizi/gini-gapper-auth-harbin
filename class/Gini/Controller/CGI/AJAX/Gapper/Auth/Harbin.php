@@ -137,8 +137,9 @@ class Harbin extends \Gini\Controller\CGI
 
         self::_setCodeRawData($data);
         $code = self::_getCode();
-        $qrcode = a('qrcode', ['qrcode'=>$code]);
+        $qrcode = a('qrcode', ['code'=>$code]);
         if (!$qrcode->id) {
+            $qrcode->code = $code;
             foreach ($data as $k=>$v) {
                 $qrcode->$k = $v;
             }

@@ -18,11 +18,13 @@ class Harbin extends \Gini\Controller\CLI
         $record = a('qrcode', ['code'=>$key]);
         if (!$record->id) {
             echo '没有相关的记录!';
+            echo "\n";
             return;
         }
 
         if ($record->atime) {
             echo '该用户已经被激活';
+            echo "\n";
             return;
         }
 
@@ -45,6 +47,7 @@ class Harbin extends \Gini\Controller\CLI
         }
         if ($info['id']) {
             echo "Email \"{$emai}\" 已经被占用！";
+            echo "\n";
             return;
         }
 
@@ -61,6 +64,7 @@ class Harbin extends \Gini\Controller\CLI
 
         if (!$group) {
             echo '获取组唯一标识失败！';
+            echo "\n";
             return;
         }
 
@@ -79,6 +83,7 @@ class Harbin extends \Gini\Controller\CLI
 
         if (!$uid) {
             echo '注册用户失败！';
+            echo "\n";
             return;
         }
 
@@ -111,6 +116,7 @@ class Harbin extends \Gini\Controller\CLI
 
         if (!$gid) {
             echo "创建group失败! uid:{$uid}";
+            echo "\n";
             return;
         }
 
@@ -123,6 +129,7 @@ class Harbin extends \Gini\Controller\CLI
         }
         if (!$bool) {
             echo "group绑定app失败! uid:{$uid} gid:{$gid}";
+            echo "\n";
             return;
         }
 
