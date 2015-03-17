@@ -5,12 +5,39 @@
                 <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span></button>
                 <h4 class="modal-title"><?=H(T('账号开通申请'))?></h4>
             </div>
-            <div class="modal-body">
-                <img src="/ajax/gapper/auth/harbin/qrcode" />
+            <div class="modal-body" style="padding: 20px;">
+                <img src="/ajax/gapper/auth/harbin/qrcode" class="pull-right" />
                 <div>
-                    <a target="_blank" href="/ajax/gapper/auth/harbin/pdf"><?=H(T('确认'))?></a>
-                    <button type="button" class="close" data-dismiss="modal">取消</button>
+                    <label class="control-label"><?=H(T('院系名称'))?>:</label>
+                    <span><?=H($department)?></span>
                 </div>
+                <div>
+                    <label class="control-label"><?=H(T('课题组名称'))?>:</label>
+                    <span><?=H($group)?></span>
+                </div>
+                <div>
+                    <label class="control-label"><?=H(T('PI 姓名'))?>:</label>
+                    <span><?=H($name)?></span>
+                </div>
+                <div>
+                    <label class="control-label"><?=H(T('PI 工号'))?>:</label>
+                    <span><?=H($wid)?></span>
+                </div>
+                <div>
+                    <label class="control-label"><?=H(T('PI 邮箱'))?>:</label>
+                    <span><?=H($email)?></span>
+                </div>
+                <div>
+                    <label class="control-label"><?=H(T('联系电话'))?>:</label>
+                    <span><?=H($phone)?></span>
+                </div>
+                <div>
+                    <label class="control-label"><?=H(T('地址'))?>:</label>
+                    <span><?=H($address)?></span>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <a target="_blank" href="/ajax/gapper/auth/harbin/pdf" class="btn btn-primary"><?=H(T('确认'))?></a>
             </div>
         </div>
     </div>

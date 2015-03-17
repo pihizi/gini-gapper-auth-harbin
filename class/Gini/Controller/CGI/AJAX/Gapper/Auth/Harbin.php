@@ -47,20 +47,67 @@ class Harbin extends \Gini\Controller\CGI
         exit;
     }
 
+    private static function _validate($key, $value)
+    {
+        switch ($key) {
+        case 'wid':
+            if (!strlen($value)) {
+                return T("请输入PI工号!");
+            }
+            break;
+        case 'name':
+            if (!strlen($value)) {
+                return T("请输入PI姓名!");
+            }
+            break;
+        case 'email':
+            $pattern = '/^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/';
+            if (!preg_match($pattern, $value)) {
+                return T('请使用正确的Email!');
+            }
+            break;
+        case 'department':
+            if (!strlen($value)) {
+                return T('请填写院系名称!');
+            }
+            break;
+        case 'group':
+            if (!strlen($value)) {
+                return T('请填写课题组名称!');
+            }
+            break;
+        }
+    }
+
     public function actionRegister()
     {
         $form = $this->form('post');
-        $secret = \Gini\Config::get('app.harbin_secret');
-        // TODO
         $data = [
-            'wid'=> $form['wid'],
-            'name'=> $form['name'],
-            'department'=> $form['department'],
-            'group'=> $form['group'],
-            'email'=> $form['email'],
-            'phone'=> $form['phone'],
-            'address'=> $form['address']
+            'wid'=> trim($form['wid']),
+            'name'=> trim($form['name']),
+            'department'=> trim($form['department']),
+            'group'=> trim($form['group']),
+            'email'=> trim($form['email']),
+            'phone'=> trim($form['phone']),
+            'address'=> trim($form['address'])
         ]; 
+
+        $error = [];
+        foreach ($data as $k=>$v) {
+            $r = self::_validate($k, $v);
+            if ($r) {
+                $error[$k] = $r;
+            }
+        }
+
+        if (!empty($error)) {
+            return $this->showJSON([
+                'type'=> 'modal',
+                'message'=> (string) V('gapper/auth/harbin/register', $data + ['error'=>$error])
+            ]);
+        }
+
+        $secret = \Gini\Config::get('app.harbin_secret');
         $code = hash_hmac('sha1', json_encode($data), $secret);
         $qrcode = a('qrcode', ['qrcode'=>$code]);
         if (!$qrcode->id) {
@@ -83,10 +130,6 @@ class Harbin extends \Gini\Controller\CGI
      */
     public function actionGetForm()
     {
-        $config = $this->getConfig();
-        return $this->showHTML('gapper/auth/harbin/register', [
-            'icon'=> $config->icon,
-            'type'=> $config->name
-        ]);
+        return $this->showHTML('gapper/auth/harbin/register', []);
     }
 }
