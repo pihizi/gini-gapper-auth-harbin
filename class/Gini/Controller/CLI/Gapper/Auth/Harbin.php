@@ -146,8 +146,7 @@ class Harbin extends \Gini\Controller\CLI
             ->body('', (string)V('gapper/auth/harbin/cli-mail', [
                     'name'=> $name,
                     'email'=> $email,
-                    'department'=> $department,
-                    'group'=> $group,
+                    'group'=> $title,
                     'password'=> $password
                 ]))
             ->send();
