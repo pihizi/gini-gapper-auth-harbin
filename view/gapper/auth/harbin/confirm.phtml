@@ -9,31 +9,31 @@
                 <img src="/ajax/gapper/auth/harbin/qrcode" class="pull-right" />
                 <div>
                     <label class="control-label"><?=H(T('院系名称'))?>:</label>
-                    <span><?=H($department)?></span>
+                    <span><?=H($department) ?: '--'?></span>
                 </div>
                 <div>
                     <label class="control-label"><?=H(T('课题组名称'))?>:</label>
-                    <span><?=H($group)?></span>
+                    <span><?=H($group) ?: '--'?></span>
                 </div>
                 <div>
                     <label class="control-label"><?=H(T('PI 姓名'))?>:</label>
-                    <span><?=H($name)?></span>
+                    <span><?=H($name) ?: '--'?></span>
                 </div>
                 <div>
                     <label class="control-label"><?=H(T('PI 工号'))?>:</label>
-                    <span><?=H($wid)?></span>
+                    <span><?=H($wid) ?: '--'?></span>
                 </div>
                 <div>
                     <label class="control-label"><?=H(T('PI 邮箱'))?>:</label>
-                    <span><?=H($email)?></span>
+                    <span><?=H($email) ?: '--'?></span>
                 </div>
                 <div>
                     <label class="control-label"><?=H(T('联系电话'))?>:</label>
-                    <span><?=H($phone)?></span>
+                    <span><?=H($phone) ?: '--'?></span>
                 </div>
                 <div>
                     <label class="control-label"><?=H(T('地址'))?>:</label>
-                    <span><?=H($address)?></span>
+                    <span><?=H($address) ?: '--'?></span>
                 </div>
             </div>
             <div class="modal-footer">

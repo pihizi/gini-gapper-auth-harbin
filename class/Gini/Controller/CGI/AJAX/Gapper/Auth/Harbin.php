@@ -17,6 +17,27 @@ class Harbin extends \Gini\Controller\CGI
 
     private static $sessionKey = 'harbin.register.qrcode';
 
+    private static function _setCodeRawData($data)
+    {
+        $_SESSION[self::$sessionKey] = $data;
+    }
+
+    private static function _getCode()
+    {
+        $data = $_SESSION[self::$sessionKey];
+        $secret = \Gini\Config::get('app.harbin_secret');
+        $code = hash_hmac('sha1', json_encode($data), $secret);
+        return $code;
+    }
+
+    private static function _getQRCodeText()
+    {
+        $data = $_SESSION[self::$sessionKey];
+        $code = self::_getCode();
+        $ret = "唯一标识: {$code}";
+        return $ret;
+    }
+
     protected function getConfig()
     {
         $infos = (array)\Gini\Config::get('gapper.auth');
@@ -32,14 +53,14 @@ class Harbin extends \Gini\Controller\CGI
         $pdf->SetFont('simfang', 'B', 20, APP_PATH . '/' . DATA_DIR . '/fonts/simfang');
         $pdf->AddPage();
         $pdf->writeHTMLCell(0, 0, 50, 20, 'T_T', 0, 1, 0, true, '', true);
-        $data = $_SESSION[self::$sessionKey];
+        $data = self::_getQRCodeText();
         $pdf->write2DBarcode($data, 'QRCODE,L', 150, 60, 40, 40, '', 'N');
         $pdf->Output('document.pdf', 'I');
     }
 
     public function actionQRCode()
     {
-        $data = $_SESSION[self::$sessionKey];
+        $data = self::_getQRCodeText();
         $code = new \TCPDF2DBarcode($data, 'QRCODE,L');
         header('Pragma: no-cache');
         header('Content-type: image/png');
@@ -107,8 +128,8 @@ class Harbin extends \Gini\Controller\CGI
             ]);
         }
 
-        $secret = \Gini\Config::get('app.harbin_secret');
-        $code = hash_hmac('sha1', json_encode($data), $secret);
+        self::_setCodeRawData($data);
+        $code = self::_getCode();
         $qrcode = a('qrcode', ['qrcode'=>$code]);
         if (!$qrcode->id) {
             foreach ($data as $k=>$v) {
@@ -116,7 +137,6 @@ class Harbin extends \Gini\Controller\CGI
             }
             $qrcode->save();
         }
-        $_SESSION[self::$sessionKey] = $code;
         return $this->showJSON([
             'type'=> 'modal',
             'message'=> (string) V('gapper/auth/harbin/confirm', $data)
