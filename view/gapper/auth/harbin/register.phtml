@@ -8,7 +8,7 @@
             <form class="modal-body form gapper-auth-form" method="POST" action="ajax/gapper/auth/harbin/register">
                 <div class="row">
                     <div class="form-group col-xs-6<?=isset($error['department']) ? ' has-error' : ''?>">
-                        <label class="control-label"><?=H(T('院系名称'))?></label>
+                        <label class="control-label"><?=H(T('学院名称'))?></label>
                         <input class="form-control" type="text" name="department" value="<?=$department ? H($department) : ''?>" />
                         <?php if (isset($error['department'])) { ?>
                         <div class="text-danger text-right"><small><?=H($error['department'])?></small></div>

@@ -35,7 +35,7 @@ class Harbin extends \Gini\Controller\CGI
         $data = $_SESSION[self::$sessionKey];
         $code = self::_getCode();
         $ret = H(T('唯一标识:')) . $code;
-        $ret .= H(T('院系名称:')) . $data['department'];
+        $ret .= H(T('学院名称:')) . $data['department'];
         $ret .= H(T('课题组名称:')) . $data['group'];
         $ret .= H(T('PI 姓名:')) . $data['name'];
         $ret .= H(T('PI 工号:')) . $data['wid'];
@@ -96,7 +96,7 @@ class Harbin extends \Gini\Controller\CGI
             break;
         case 'department':
             if (!strlen($value)) {
-                return T('请填写院系名称!');
+                return T('请填写学院信息!');
             }
             break;
         case 'group':
