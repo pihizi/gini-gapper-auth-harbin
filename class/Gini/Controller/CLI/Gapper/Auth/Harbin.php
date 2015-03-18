@@ -89,7 +89,6 @@ class Harbin extends \Gini\Controller\CLI
             return;
         }
 
-        /*
         // 绑定identity
         // 绑定失败，导致email被占用，如果用户想在以这个email激活，将直接报错
         // 所以，需要联系网站客服
@@ -103,7 +102,6 @@ class Harbin extends \Gini\Controller\CLI
             echo "linkIdentity失败！uid:{$uid}";
             return;
         }
-         */
 
         // 创建分组
         try {
