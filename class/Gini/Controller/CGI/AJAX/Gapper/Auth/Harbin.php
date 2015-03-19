@@ -22,6 +22,11 @@ class Harbin extends \Gini\Controller\CGI
         $_SESSION[self::$sessionKey] = $data;
     }
 
+    private static function _getCodeRawData()
+    {
+        return $_SESSION[self::$sessionKey];
+    }
+
     private static function _getCode()
     {
         $data = $_SESSION[self::$sessionKey];
@@ -53,13 +58,27 @@ class Harbin extends \Gini\Controller\CGI
 
     public function actionPDF()
     {
+        $title = T('天津科技大学采购平台课题组注册表');
         $pdf = new \TCPDF;
-        $pdf->setTitle('title');
+        $pdf->setTitle($title);
         $pdf->SetPrintHeader(false);
         $pdf->SetPrintFooter(false);
-        $pdf->SetFont('simfang', 'B', 20, APP_PATH . '/' . DATA_DIR . '/fonts/simfang');
+
         $pdf->AddPage();
-        $pdf->writeHTMLCell(0, 0, 50, 20, 'T_T', 0, 1, 0, true, '', true);
+
+        $pdf->SetFont('simfang', 'B', 20, APP_PATH . '/' . DATA_DIR . '/fonts/simfang');
+        $pdf->writeHTMLCell(0, 0, 50, 20, '<h1>' . H($title) . '</h1>', 0, 1, 0, true, '', true);
+        $pdf->SetLineStyle([
+            'width' => 0.5, 'cap' => 'butt', 'join' => 'miter', 'dash' => 2, 'color' => [0, 0, 0]
+        ]);
+        $pdf->Line(10, 40, 200, 40, ['width'=>0.5]);
+
+        $pdf->SetFont('simfang', '', 11, APP_PATH.'/'.DATA_DIR.'/fonts/simfang');
+        $pdf->writeHTMLCell(
+            145, 20, 30, 140, 
+            V('gapper/auth/harbin/pdf.phtml', (array)self::_getCodeRawData()), 
+            0, 1, 0, true, '', true);
+
         $data = self::_getQRCodeText();
         $pdf->write2DBarcode($data, 'QRCODE,L', 150, 60, 40, 40, '', 'N');
         $pdf->Output('document.pdf', 'I');
