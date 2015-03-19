@@ -67,20 +67,26 @@ class Harbin extends \Gini\Controller\CGI
         $pdf->AddPage();
 
         $pdf->SetFont('simfang', 'B', 20, APP_PATH . '/' . DATA_DIR . '/fonts/simfang');
-        $pdf->writeHTMLCell(0, 0, 50, 20, '<h1>' . H($title) . '</h1>', 0, 1, 0, true, '', true);
+        $pdf->writeHTMLCell(0, 0, 30, 20, '<h1>' . H($title) . '</h1>', 0, 1, 0, true, '', true);
         $pdf->SetLineStyle([
             'width' => 0.5, 'cap' => 'butt', 'join' => 'miter', 'dash' => 2, 'color' => [0, 0, 0]
         ]);
         $pdf->Line(10, 40, 200, 40, ['width'=>0.5]);
 
         $pdf->SetFont('simfang', '', 11, APP_PATH.'/'.DATA_DIR.'/fonts/simfang');
-        $pdf->writeHTMLCell(
-            145, 20, 30, 140, 
-            V('gapper/auth/harbin/pdf.phtml', (array)self::_getCodeRawData()), 
-            0, 1, 0, true, '', true);
+        $html = V('gapper/auth/harbin/pdf', (array)self::_getCodeRawData());
+        $pdf->writeHTMLCell(0, 0, 10, 50, $html, 0, 1, 0, true, '', true);
 
         $data = self::_getQRCodeText();
-        $pdf->write2DBarcode($data, 'QRCODE,L', 150, 60, 40, 40, '', 'N');
+        $pdf->write2DBarcode($data, 'QRCODE,L', 165, 50, 30, 30, '', 'N');
+
+        $pdf->SetLineStyle([
+            'width' => 0.5, 'cap' => 'butt', 'join' => 'miter', 'dash' => 2, 'color' => [0, 0, 0]
+        ]);
+        $pdf->Line(10, 120, 200, 120, ['width'=>0.5]);
+
+        $pdf->writeHTMLCell(0, 0, 10, 130, '<p>老师(签字):</p>', 0, 1, 0, true, '', true);
+
         $pdf->Output('document.pdf', 'I');
     }
 
