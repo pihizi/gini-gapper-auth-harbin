@@ -85,7 +85,7 @@ class Harbin extends \Gini\Controller\CGI
         ]);
         $pdf->Line(10, 120, 200, 120, ['width'=>0.5]);
 
-        $pdf->writeHTMLCell(0, 0, 10, 130, '<p>老师(签字):</p>', 0, 1, 0, true, '', true);
+        $pdf->writeHTMLCell(0, 0, 130, 130, '<p>老师(签字):</p>', 0, 1, 0, true, '', true);
 
         $pdf->Output('document.pdf', 'I');
     }
