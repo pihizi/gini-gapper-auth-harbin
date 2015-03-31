@@ -53,7 +53,7 @@ class Harbin extends \Gini\Controller\CLI
             return;
         }
 
-        $group = Pinyin::pinyin($title, [
+        $group = Pinyin::trans($title, [
             'delimiter'=> '',
             'accent'=> false,
         ]);
